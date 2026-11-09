@@ -1,0 +1,104 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Node.js
+node_modules/
+.next/
+out/
+.vercel/
+
+# Dataset and generated data
+data/*.csv
+data/*.xlsx
+data/*.xls
+results/
+
+# Model artifacts
+*.joblib
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.onnx
+
+# Backup files
+*.bak
+*.backup
+*.before_*
+*.backup_*
+
+# Generated PDF reports
+**/laporan_mai*.pdf
+
+# Backup files - case variations
+**/*backup*
+**/*BACKUP*
+**/*.before*
+**/*.bak
+**/*.backup
+
+# Temporary encoding repair scripts
+**/repair_encoding*
+
+# Generated presentation reports
+**/tree_growth_report_current.pptx
+
+# Temporary encoding repair scripts
+**/repair_encoding*
+
+# Allow the active dummy dataset for public dashboard deployment
+!data/dataset_phi66_final.csv
+
+# Frontend backup
+/frontend copy/
+/frontend/.git_old_backup/

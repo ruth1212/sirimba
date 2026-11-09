@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "test_rows": 43740,
+  "volume_test_rows": 35640,
+  "evaluation_windows": {
+    "dbh_cm": "P6-P66",
+    "height_m": "P6-P66",
+    "volume_m3_tree": "P18-P66"
+  },
+  "phi_age_months": 66,
+  "metrics": [
+    {
+      "model": "PINNs",
+      "target": "dbh_cm",
+      "evaluation_window": "P6-P66",
+      "MAE": 0.9511706129847955,
+      "RMSE": 1.178832764040887,
+      "R2": 0.9421356425447108,
+      "MAPE_percent": 10.356052968997115
+    },
+    {
+      "model": "PINNs",
+      "target": "height_m",
+      "evaluation_window": "P6-P66",
+      "MAE": 1.2784960362669466,
+      "RMSE": 1.6256408125477473,
+      "R2": 0.9369751559736157,
+      "MAPE_percent": 11.192418248271004
+    },
+    {
+      "model": "PINNs",
+      "target": "volume_m3_tree",
+      "evaluation_window": "P18-P66",
+      "MAE": 0.07391596649045494,
+      "RMSE": 0.09033574755093866,
+      "R2": 0.2539441075877762,
+      "MAPE_percent": 112.48438440424306
+    }
+  ],
+  "volume_positivity": {
+    "negative": 0,
+    "zero": 0
+  },
+  "training_performed": false,
+  "dataset_modified": false,
+  "rf_model_modified": false
+}

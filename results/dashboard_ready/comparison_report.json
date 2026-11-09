@@ -1,0 +1,38 @@
+{
+  "step": 60,
+  "purpose": "Final factual comparison of Random Forest and PINNs V2 using the same official held-out test split.",
+  "models": [
+    "Random Forest",
+    "PINNs V2 Constrained"
+  ],
+  "targets": [
+    "dbh_cm",
+    "height_m",
+    "volume_m3_tree"
+  ],
+  "phi": {
+    "age_months": 66,
+    "label": "PHI"
+  },
+  "volume_prediction_age": {
+    "min": 18,
+    "max": 66
+  },
+  "dataset_modified": false,
+  "retraining_performed": false,
+  "integrity_checks": {
+    "models": true,
+    "targets": true,
+    "trajectory_models": true,
+    "trajectory_targets": true,
+    "p66_present": true,
+    "no_nan_trajectory": true,
+    "trajectory_age_counts": true,
+    "same_test_rows": true
+  },
+  "outputs": {
+    "metrics": "C:\\tree_growth_fs\\tree_growth_fs\\results\\model_comparison\\rf_vs_pinns_final_metrics.csv",
+    "trajectory": "C:\\tree_growth_fs\\tree_growth_fs\\results\\model_comparison\\rf_vs_pinns_trajectory.csv",
+    "phi": "C:\\tree_growth_fs\\tree_growth_fs\\results\\model_comparison\\rf_vs_pinns_phi_p66.csv"
+  }
+}

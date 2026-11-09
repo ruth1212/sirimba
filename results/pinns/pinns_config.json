@@ -1,0 +1,78 @@
+{
+  "project": "TREE GROWTH ANALYTICS - PINNs",
+  "source_data": {
+    "train": "data\\model_ready\\train.csv",
+    "test": "data\\model_ready\\test.csv"
+  },
+  "features": [
+    "age_months",
+    "inventory_year",
+    "clone_factor",
+    "planting_year",
+    "disease_score",
+    "trees_per_ha"
+  ],
+  "targets": [
+    "dbh_cm",
+    "height_m",
+    "volume_m3_tree"
+  ],
+  "group_columns": [
+    "compartment_id"
+  ],
+  "age": {
+    "minimum": 6,
+    "maximum": 66,
+    "step_months": 6,
+    "phi_age_months": 66,
+    "phi_label": "P66"
+  },
+  "target_windows": {
+    "dbh_cm": {
+      "min_age_months": 6,
+      "max_age_months": 66
+    },
+    "height_m": {
+      "min_age_months": 6,
+      "max_age_months": 66
+    },
+    "volume_m3_tree": {
+      "min_age_months": 18,
+      "max_age_months": 66
+    }
+  },
+  "physics": {
+    "enabled": true,
+    "min_age_months": 18,
+    "max_age_months": 66,
+    "relation": "V_physics = C * DBH^2 * Height",
+    "physical_units": true
+  },
+  "architecture": {
+    "input_size": 6,
+    "hidden_layers": [
+      64,
+      64,
+      64
+    ],
+    "activation": "Tanh",
+    "output_size": 3,
+    "volume_output": "Softplus"
+  },
+  "training": {
+    "new_model_from_scratch": true,
+    "reuse_old_checkpoint": false,
+    "random_seed": 42
+  },
+  "metrics": [
+    "MAE",
+    "RMSE",
+    "R2",
+    "MAPE"
+  ],
+  "comparison_rule": {
+    "same_train_test_split_as_random_forest": true,
+    "same_features_as_random_forest": true,
+    "same_targets_as_random_forest": true
+  }
+}

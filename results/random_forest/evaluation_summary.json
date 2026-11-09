@@ -1,0 +1,88 @@
+{
+  "step": "43",
+  "evaluation_source": {
+    "dbh_height": "data\\model_ready\\pipeline\\test_dbh_height.csv",
+    "volume": "data\\model_ready\\pipeline\\test_volume_p18.csv"
+  },
+  "models": {
+    "RF_DBH": {
+      "model_path": "results\\random_forest\\models\\RF_DBH.joblib",
+      "target": "dbh_cm",
+      "age_range": "P6-P66"
+    },
+    "RF_HEIGHT": {
+      "model_path": "results\\random_forest\\models\\RF_HEIGHT.joblib",
+      "target": "height_m",
+      "age_range": "P6-P66"
+    },
+    "RF_VOLUME": {
+      "model_path": "results\\random_forest\\models\\RF_VOLUME.joblib",
+      "target": "volume_m3_tree",
+      "age_range": "P18-P66"
+    }
+  },
+  "metrics": [
+    {
+      "model": "RF_DBH",
+      "target": "dbh_cm",
+      "age_range": "P6-P66",
+      "test_rows": 43740,
+      "MAE": 0.4234058823855194,
+      "RMSE": 0.5338209498117371,
+      "R2": 0.9881341742514792,
+      "MAPE_percent": 3.318819450435221
+    },
+    {
+      "model": "RF_HEIGHT",
+      "target": "height_m",
+      "age_range": "P6-P66",
+      "test_rows": 43740,
+      "MAE": 0.5522802385008617,
+      "RMSE": 0.6970061133974081,
+      "R2": 0.9884139401853276,
+      "MAPE_percent": 3.125253544328822
+    },
+    {
+      "model": "RF_VOLUME",
+      "target": "volume_m3_tree",
+      "age_range": "P18-P66",
+      "test_rows": 35640,
+      "MAE": 0.026477429612392633,
+      "RMSE": 0.03786601342736335,
+      "R2": 0.86891552823251,
+      "MAPE_percent": 15.552191835369095
+    }
+  ],
+  "phi_evaluation": [
+    {
+      "model": "RF_DBH",
+      "target": "dbh_cm",
+      "phi_age_months": 66,
+      "actual_mean": 18.505493827160496,
+      "predicted_mean": 18.48851857093823,
+      "MAE_at_P66": 0.5783258593131575,
+      "n": 3240
+    },
+    {
+      "model": "RF_HEIGHT",
+      "target": "height_m",
+      "phi_age_months": 66,
+      "actual_mean": 24.80869054158833,
+      "predicted_mean": 24.812127947287976,
+      "MAE_at_P66": 0.7568080424650598,
+      "n": 3240
+    },
+    {
+      "model": "RF_VOLUME",
+      "target": "volume_m3_tree",
+      "phi_age_months": 66,
+      "actual_mean": 0.2779582098765432,
+      "predicted_mean": 0.2800323249104315,
+      "MAE_at_P66": 0.04191026418264679,
+      "n": 3240
+    }
+  ],
+  "training_data_used_for_metrics": false,
+  "retraining_performed": false,
+  "trajectory_generated": true
+}

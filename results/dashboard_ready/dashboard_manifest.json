@@ -1,0 +1,33 @@
+{
+  "project": "TREE GROWTH ANALYTICS",
+  "status": "FINAL_MODEL_EVALUATION",
+  "dataset_scope": {
+    "age_min_months": 6,
+    "age_max_months": 66,
+    "phi_months": 66,
+    "phi_label": "P66"
+  },
+  "models": [
+    "Random Forest",
+    "PINNs V2 Constrained"
+  ],
+  "targets": [
+    "dbh_cm",
+    "height_m",
+    "volume_m3_tree"
+  ],
+  "evaluation": {
+    "same_test_split": true,
+    "group_aware_split": true,
+    "test_compartments": 3,
+    "dbh_height_age_range": "P6-P66",
+    "volume_age_range": "P18-P66"
+  },
+  "artifacts": [
+    "rf_metrics.csv",
+    "rf_vs_pinns_trajectory.csv",
+    "rf_vs_pinns_phi_p66.csv",
+    "comparison_report.json",
+    "trajectory_plot_data.csv"
+  ]
+}

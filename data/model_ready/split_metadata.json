@@ -1,0 +1,35 @@
+{
+    "source_dataset": "C:\\tree_growth_fs\\tree_growth_fs\\data\\dataset_phi66_final.csv",
+    "features": [
+        "age_months",
+        "inventory_year",
+        "clone_factor",
+        "planting_year",
+        "disease_score",
+        "trees_per_ha"
+    ],
+    "targets": [
+        "dbh_cm",
+        "height_m",
+        "volume_m3_tree"
+    ],
+    "group_column": "compartment_id",
+    "group_key_columns": [
+        "regional_id",
+        "compartment_id",
+        "species",
+        "clone",
+        "planting_year"
+    ],
+    "split_method": "GroupShuffleSplit",
+    "test_size": 0.2,
+    "random_state": 42,
+    "total_rows": 218700,
+    "train_rows": 174960,
+    "test_rows": 43740,
+    "total_compartments": 15,
+    "train_compartments": 12,
+    "test_compartments": 3,
+    "group_overlap": 0,
+    "exact_duplicate_rows": 4
+}

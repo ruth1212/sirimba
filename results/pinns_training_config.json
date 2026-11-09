@@ -1,0 +1,29 @@
+{
+    "model": "TreeGrowthPINN",
+    "random_state": 42,
+    "features": [
+        "age_months",
+        "inventory_year",
+        "clone_factor",
+        "planting_year",
+        "disease_score",
+        "trees_per_ha"
+    ],
+    "targets": [
+        "dbh_cm",
+        "height_m",
+        "volume_m3_tree"
+    ],
+    "epochs_requested": 30,
+    "epochs_completed": 30,
+    "batch_size": 2048,
+    "learning_rate": 0.001,
+    "lambda_physics": 0.1,
+    "physics_C": 3.614623380990013e-05,
+    "physics_loss_mode": "denormalized_raw_units",
+    "physics_residual_scaling": "volume_std",
+    "best_epoch": 30,
+    "best_loss": 0.08651790943874364,
+    "total_training_time_seconds": 307.01595520973206,
+    "device": "cpu"
+}

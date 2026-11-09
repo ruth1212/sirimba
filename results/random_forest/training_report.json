@@ -1,0 +1,91 @@
+{
+  "step": "42",
+  "algorithm": "RandomForestRegressor",
+  "features": [
+    "age_months",
+    "inventory_year",
+    "clone_factor",
+    "planting_year",
+    "disease_score",
+    "trees_per_ha"
+  ],
+  "parameters": {
+    "n_estimators": 100,
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "models": [
+    {
+      "model_name": "RF_DBH",
+      "target": "dbh_cm",
+      "age_range": "P6-P66",
+      "training_rows": 174960,
+      "feature_count": 6,
+      "features": [
+        "age_months",
+        "inventory_year",
+        "clone_factor",
+        "planting_year",
+        "disease_score",
+        "trees_per_ha"
+      ],
+      "parameters": {
+        "n_estimators": 100,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "training_seconds": 9.084279,
+      "model_path": "results\\random_forest\\models\\RF_DBH.joblib",
+      "feature_importance_path": "results\\random_forest\\RF_DBH_feature_importance.csv"
+    },
+    {
+      "model_name": "RF_HEIGHT",
+      "target": "height_m",
+      "age_range": "P6-P66",
+      "training_rows": 174960,
+      "feature_count": 6,
+      "features": [
+        "age_months",
+        "inventory_year",
+        "clone_factor",
+        "planting_year",
+        "disease_score",
+        "trees_per_ha"
+      ],
+      "parameters": {
+        "n_estimators": 100,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "training_seconds": 6.880524,
+      "model_path": "results\\random_forest\\models\\RF_HEIGHT.joblib",
+      "feature_importance_path": "results\\random_forest\\RF_HEIGHT_feature_importance.csv"
+    },
+    {
+      "model_name": "RF_VOLUME",
+      "target": "volume_m3_tree",
+      "age_range": "P18-P66",
+      "training_rows": 142560,
+      "feature_count": 6,
+      "features": [
+        "age_months",
+        "inventory_year",
+        "clone_factor",
+        "planting_year",
+        "disease_score",
+        "trees_per_ha"
+      ],
+      "parameters": {
+        "n_estimators": 100,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "training_seconds": 4.304359,
+      "model_path": "results\\random_forest\\models\\RF_VOLUME.joblib",
+      "feature_importance_path": "results\\random_forest\\RF_VOLUME_feature_importance.csv"
+    }
+  ],
+  "total_training_seconds": 24.273508,
+  "training_completed": true,
+  "evaluation_completed": false
+}

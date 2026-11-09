@@ -1,0 +1,30 @@
+{
+    "model": "TreeGrowthPINN",
+    "random_state": 42,
+    "features": [
+        "age_months",
+        "inventory_year",
+        "clone_factor",
+        "planting_year",
+        "disease_score",
+        "trees_per_ha"
+    ],
+    "targets": [
+        "dbh_cm",
+        "height_m",
+        "volume_m3_tree"
+    ],
+    "architecture": {
+        "input_size": 6,
+        "hidden_size": 64,
+        "hidden_layers": 3,
+        "activation": "Tanh",
+        "output_size": 3
+    },
+    "physics": {
+        "relationship": "volume ~= C * dbh^2 * height",
+        "C": 3.614623380990013e-05,
+        "lambda_physics": 0.1
+    },
+    "device": "cpu"
+}

@@ -1,0 +1,58 @@
+{
+  "step": "21N",
+  "model": "PINNs Hard Positive",
+  "features": [
+    "age_months",
+    "inventory_year",
+    "clone_factor",
+    "planting_year",
+    "disease_score",
+    "trees_per_ha"
+  ],
+  "targets": [
+    "dbh_cm",
+    "height_m",
+    "volume_m3_tree"
+  ],
+  "architecture": "6-64-64-64-3",
+  "activation": "Tanh",
+  "volume_activation": "Softplus raw physical space",
+  "epochs": 30,
+  "batch_size": 2048,
+  "learning_rate": 0.001,
+  "lambda_physics": 0.1,
+  "device": "cpu",
+  "training_rows": 485998,
+  "best_epoch": 30,
+  "best_loss": 0.08646712868723724,
+  "training_time_sec": 310.46730613708496,
+  "physics_constant_C": 3.6147339415038005e-05,
+  "normalization": {
+    "X_mean": [
+      113.00044250488281,
+      2015.7999267578125,
+      1.0266667604446411,
+      2006.6666259765625,
+      0.15310348570346832,
+      1341.3330078125
+    ],
+    "X_std": [
+      76.79177856445312,
+      6.368646144866943,
+      0.03999999538064003,
+      6.236089706420898,
+      0.083933524787426,
+      241.78880310058594
+    ],
+    "Y_mean": [
+      19.714773178100586,
+      21.810829162597656,
+      0.3731047511100769
+    ],
+    "Y_std": [
+      5.96793270111084,
+      5.634883403778076,
+      0.2218773066997528
+    ]
+  }
+}

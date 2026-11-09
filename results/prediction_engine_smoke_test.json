@@ -1,0 +1,45 @@
+{
+  "input": {
+    "age_months": 60.0,
+    "inventory_year": 2025.0,
+    "clone_factor": 1.0,
+    "planting_year": 2025.0,
+    "disease_score": 0.0,
+    "trees_per_ha": 1100.0
+  },
+  "random_forest": {
+    "dbh_cm": 19.47626089452717,
+    "height_m": 21.80208447613592,
+    "volume_m3_tree": 0.30139261930914,
+    "tha_m": 26.26030943362113,
+    "mai_m3_tree_year": 0.060278523861828005
+  },
+  "pinns": {
+    "dbh_cm": 22.087993621826172,
+    "height_m": 24.451801300048828,
+    "volume_m3_tree": 0.43698394298553467,
+    "mai_m3_tree_year": 0.08739678859710694
+  },
+  "difference_rf_minus_pinns": {
+    "dbh_cm": -2.611732727299003,
+    "height_m": -2.6497168239129074,
+    "volume_m3_tree": -0.13559132367639465,
+    "mai_m3_tree_year": -0.02711826473527893
+  },
+  "metadata": {
+    "pinns_model": "Hard-Positive PINNs",
+    "pinns_checkpoint": "C:\\tree_growth_fs\\tree_growth_fs\\results\\pinns_models\\best_pinns_hard_positive_model.pt",
+    "tha_definition": "THA (Top Height) = tinggi dominan tegakan, yaitu ukuran tinggi kelompok pohon-pohon dominan/tertinggi.",
+    "tha_source_method": "Auxiliary Random Forest THA model",
+    "pinns_directly_predicts_tha": false,
+    "mai_definition": "MAI = predicted volume per tree / age in years",
+    "mai_unit": "m3/tree/year"
+  },
+  "units": {
+    "dbh_cm": "cm",
+    "height_m": "m",
+    "volume_m3_tree": "m3/tree",
+    "tha_m": "m",
+    "mai_m3_tree_year": "m3/tree/year"
+  }
+}

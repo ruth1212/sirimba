@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "description": "PINNs retraining with physical-space positive volume output.",
+  "input_files": {
+    "dbh_height": "C:\\tree_growth_fs\\tree_growth_fs\\data\\model_ready\\pipeline\\train_dbh_height.csv",
+    "volume": "C:\\tree_growth_fs\\tree_growth_fs\\data\\model_ready\\pipeline\\train_volume_p18.csv"
+  },
+  "rows": {
+    "dbh_height": 174960,
+    "volume_p18_p66": 142560
+  },
+  "ages": {
+    "dbh_height": [
+      6,
+      12,
+      18,
+      24,
+      30,
+      36,
+      42,
+      48,
+      54,
+      60,
+      66
+    ],
+    "volume": [
+      18,
+      24,
+      30,
+      36,
+      42,
+      48,
+      54,
+      60,
+      66
+    ]
+  },
+  "architecture": {
+    "features": [
+      "age_months",
+      "inventory_year",
+      "clone_factor",
+      "planting_year",
+      "disease_score",
+      "trees_per_ha"
+    ],
+    "targets": [
+      "dbh_cm",
+      "height_m",
+      "volume_m3_tree"
+    ],
+    "hidden_size": 64,
+    "hidden_layers": 3,
+    "parameter_count": 8963
+  },
+  "training": {
+    "epochs": 100,
+    "learning_rate": 0.001,
+    "physics_weight": 0.1,
+    "best_epoch": 100,
+    "best_total_loss": 5.254158973693848,
+    "training_time_seconds": 150.21576285362244
+  },
+  "physics": {
+    "coefficient": 3.41371714933862e-05,
+    "start_age_months": 18,
+    "end_age_months": 66
+  },
+  "volume_output": {
+    "space": "physical",
+    "activation": "Softplus",
+    "negative_predictions": 0,
+    "zero_predictions": 0,
+    "minimum": 0.35072991251945496,
+    "maximum": 0.3510393798351288
+  },
+  "sanity": {
+    "dbh_min": 14.423358917236328,
+    "dbh_max": 14.449958801269531,
+    "height_min": 18.512502670288086,
+    "height_max": 18.520376205444336
+  },
+  "artifacts": {
+    "checkpoint": "C:\\tree_growth_fs\\tree_growth_fs\\results\\pinns\\models\\pinns_growth_model_fixed_volume.pt",
+    "history": "C:\\tree_growth_fs\\tree_growth_fs\\results\\pinns\\training_history_fixed_volume.csv",
+    "report": "C:\\tree_growth_fs\\tree_growth_fs\\results\\pinns\\training_report_fixed_volume.json"
+  }
+}

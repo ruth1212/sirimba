@@ -1,0 +1,33 @@
+{
+  "evaluation_type": "PINNs positive-volume constraint",
+  "model_path": "C:\\tree_growth_fs\\tree_growth_fs\\results\\pinns_models\\best_pinns_positive_model.pt",
+  "test_path": "C:\\tree_growth_fs\\tree_growth_fs\\results\\model_test.csv",
+  "device": "cpu",
+  "features": [
+    "age_months",
+    "inventory_year",
+    "clone_factor",
+    "planting_year",
+    "disease_score",
+    "trees_per_ha"
+  ],
+  "targets": [
+    "dbh_cm",
+    "height_m",
+    "volume_m3_tree"
+  ],
+  "test_rows": 121498,
+  "expected_test_rows": 121498,
+  "best_epoch": 30,
+  "best_loss": 0.08648550868560137,
+  "lambda_physics": 0.1,
+  "lambda_positive": 0.5,
+  "negative_volume_count": 2668,
+  "negative_volume_percentage": 2.19592092050898,
+  "minimum_predicted_volume": -0.012737005949020386,
+  "maximum_predicted_volume": 0.8375045657157898,
+  "mean_predicted_volume": 0.3433361053466797,
+  "p6_test_rows": 4048,
+  "p6_negative_volume_count": 2662,
+  "training_baseline_model_replaced": false
+}

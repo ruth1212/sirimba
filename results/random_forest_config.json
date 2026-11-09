@@ -1,0 +1,26 @@
+{
+    "model": "RandomForestRegressor",
+    "random_state": 42,
+    "features": [
+        "age_months",
+        "inventory_year",
+        "clone_factor",
+        "planting_year",
+        "disease_score",
+        "trees_per_ha"
+    ],
+    "targets": [
+        "dbh_cm",
+        "height_m",
+        "volume_m3_tree"
+    ],
+    "parameters": {
+        "n_estimators": 100,
+        "max_depth": null,
+        "min_samples_split": 2,
+        "min_samples_leaf": 1,
+        "max_features": 1.0,
+        "random_state": 42,
+        "n_jobs": -1
+    }
+}

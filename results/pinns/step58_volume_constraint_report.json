@@ -1,0 +1,18 @@
+{
+  "step": 58,
+  "method": "Physical output constraint: volume_prediction = max(raw_prediction, 0)",
+  "total_predictions": 35640,
+  "negative_before": 296,
+  "negative_after": 0,
+  "changed_predictions": 296,
+  "changed_percentage": 0.8305274971941637,
+  "raw_min_volume": -0.0034309328,
+  "constrained_min_volume": 0.0,
+  "raw_mae": 0.03325181173866416,
+  "constrained_mae": 0.03323331319335193,
+  "mae_change": -1.8498545312224668e-05,
+  "dataset_modified": false,
+  "checkpoint_modified": false,
+  "retraining_performed": false,
+  "constraint_only": true
+}

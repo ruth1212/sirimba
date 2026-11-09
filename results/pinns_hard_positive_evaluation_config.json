@@ -1,0 +1,28 @@
+{
+  "model": "PINNs_Hard_Positive",
+  "checkpoint": "results/pinns_models/best_pinns_hard_positive_model.pt",
+  "test_file": "results/model_test.csv",
+  "test_rows": 121498,
+  "features": [
+    "age_months",
+    "inventory_year",
+    "clone_factor",
+    "planting_year",
+    "disease_score",
+    "trees_per_ha"
+  ],
+  "targets": [
+    "dbh_cm",
+    "height_m",
+    "volume_m3_tree"
+  ],
+  "best_epoch": 30,
+  "best_loss": 0.08646712868723724,
+  "physics_constant_C": 3.6147339415038005e-05,
+  "negative_volume_count": 0,
+  "zero_volume_count": 0,
+  "positive_volume_count": 121498,
+  "minimum_volume": 0.007228106260299683,
+  "maximum_volume": 0.8301136493682861,
+  "physical_positivity_passed": true
+}

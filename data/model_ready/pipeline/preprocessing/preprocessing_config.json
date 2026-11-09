@@ -1,0 +1,50 @@
+{
+  "step": "40",
+  "method": "StandardScaler",
+  "feature_scaler": {
+    "fit_source": "train_only",
+    "features": [
+      "age_months",
+      "inventory_year",
+      "clone_factor",
+      "planting_year",
+      "disease_score",
+      "trees_per_ha"
+    ]
+  },
+  "target_scalers": {
+    "dbh_cm": {
+      "fit_source": "train_only",
+      "target": "dbh_cm",
+      "valid_age_range": "P6-P66"
+    },
+    "height_m": {
+      "fit_source": "train_only",
+      "target": "height_m",
+      "valid_age_range": "P6-P66"
+    },
+    "volume_m3_tree": {
+      "fit_source": "train_volume_p18_only",
+      "target": "volume_m3_tree",
+      "valid_age_range": "P18-P66"
+    }
+  },
+  "random_forest": {
+    "feature_scaling_required": false,
+    "target_scaling_required": false,
+    "uses_raw_physical_units": true
+  },
+  "pinns": {
+    "feature_scaling": true,
+    "target_scaling": true,
+    "physics_loss_units": "physical_units",
+    "physics_relation": "V ~ DBH^2 * Height",
+    "volume_physics_start_age_months": 18
+  },
+  "prediction_rules": {
+    "dbh": "P6-P66",
+    "height": "P6-P66",
+    "volume": "P18-P66",
+    "phi": "P66 = 66 months"
+  }
+}

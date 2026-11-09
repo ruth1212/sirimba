@@ -1,0 +1,53 @@
+{
+  "status": "INSPECTED",
+  "checkpoint": "C:\\tree_growth_fs\\tree_growth_fs\\results\\pinns\\models\\pinns_v2_growth_model.pt",
+  "checkpoint_epoch": 100,
+  "checkpoint_loss": 0.34289681911468506,
+  "data": {
+    "dbh_height_rows": 174960,
+    "volume_rows": 142560,
+    "dbh_height_age_range": [
+      6,
+      66
+    ],
+    "volume_age_range": [
+      18,
+      66
+    ]
+  },
+  "trajectory_logic": {
+    "dbh_predicted_decreases": 0,
+    "height_predicted_decreases": 0,
+    "volume_predicted_decreases": 0,
+    "dbh_predicted_stagnations": 0,
+    "height_predicted_stagnations": 0,
+    "dbh_early_growth_cm_per_year": 3.295149087905884,
+    "dbh_middle_growth_cm_per_year": 3.0095653533935547,
+    "dbh_late_growth_cm_per_year": 0.9365329742431641,
+    "height_early_growth_m_per_year": 4.05364465713501,
+    "height_middle_growth_m_per_year": 3.699228286743164,
+    "height_late_growth_m_per_year": 1.88751220703125,
+    "dbh_shape_pass": true,
+    "height_shape_pass": true,
+    "dbh_monotonic_pass": true,
+    "height_monotonic_pass": true
+  },
+  "volume_positivity": {
+    "negative_count": 553,
+    "total_predictions": 142560,
+    "negative_rate": 0.003879068462401796
+  },
+  "phi66": {
+    "dbh_actual": 19.21535725308642,
+    "dbh_pred": 19.751968383789062,
+    "dbh_mae": 1.0087576544034824,
+    "height_actual": 24.812571247814383,
+    "height_pred": 26.16175079345703,
+    "height_mae": 1.8227070668270393,
+    "volume_actual": 0.3027271759259259,
+    "volume_pred": 0.31190481781959534,
+    "volume_mae": 0.05472497251436298,
+    "negative_volume_count": 0
+  },
+  "note": "Trajectory inspection only. No training, dataset modification, or checkpoint modification was performed."
+}

@@ -1,0 +1,25 @@
+{
+  "step": 46,
+  "status": "PASS",
+  "device": "cpu",
+  "architecture": {
+    "input": 6,
+    "hidden": [
+      64,
+      64,
+      64
+    ],
+    "activation": "Tanh",
+    "outputs": 3,
+    "volume_activation": "Softplus"
+  },
+  "target_windows": {
+    "dbh_cm": "P6-P66",
+    "height_m": "P6-P66",
+    "volume_m3_tree": "P18-P66"
+  },
+  "physics_window": "P18-P66",
+  "phi": "P66 / 66 months",
+  "old_checkpoint_reused": false,
+  "parameter_count": 8963
+}

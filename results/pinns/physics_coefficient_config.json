@@ -1,0 +1,17 @@
+{
+  "formula": "V = C * DBH^2 * Height",
+  "coefficient_method": "median",
+  "coefficient": 3.41371714933862e-05,
+  "calibration_source": "data/model_ready/train.csv",
+  "calibration_age_min_months": 18,
+  "calibration_age_max_months": 66,
+  "calibration_rows": 142560,
+  "residual": {
+    "mae": 0.02845169252853415,
+    "rmse": 0.03934455463234277
+  },
+  "test_data_used": false,
+  "dataset_modified": false,
+  "rf_model_used": false,
+  "pinns_training_performed": false
+}

@@ -1,0 +1,71 @@
+{
+  "step": 59,
+  "model": "PINNs V2",
+  "evaluation_type": "Final held-out test evaluation using constrained volume output",
+  "test_rows_dbh": 43740,
+  "test_rows_height": 43740,
+  "test_rows_volume": 35640,
+  "volume_constraint": "volume_prediction = max(raw_prediction, 0)",
+  "negative_dbh_predictions": 0,
+  "negative_height_predictions": 0,
+  "negative_volume_predictions": 0,
+  "zero_volume_predictions": 296,
+  "dataset_modified": false,
+  "model_checkpoint_modified": false,
+  "retraining_performed": false,
+  "metrics": {
+    "dbh_cm": {
+      "MAE": 1.1031189377472947,
+      "RMSE": 1.359792426881063,
+      "R2": 0.9230068700185489,
+      "MAPE_percent": 12.61927551819956
+    },
+    "height_m": {
+      "MAE": 1.5766528753344478,
+      "RMSE": 1.97905355129121,
+      "R2": 0.9065933742828448,
+      "MAPE_percent": 13.861724794502805
+    },
+    "volume_m3_tree": {
+      "MAE": 0.03323331319335193,
+      "RMSE": 0.04500562703389161,
+      "R2": 0.8148235675580593,
+      "MAPE_percent": 23.76487912638401
+    }
+  },
+  "phi_p66": [
+    {
+      "target": "dbh_cm",
+      "age_months": 66,
+      "n": 3240,
+      "MAE": 1.0382110876543211,
+      "RMSE": 1.2604692145856287,
+      "R2": 0.38143986192718027,
+      "MAPE_percent": 5.776753690331537,
+      "actual_mean": 18.505493827160496,
+      "predicted_mean": 19.216635254320988
+    },
+    {
+      "target": "height_m",
+      "age_months": 66,
+      "n": 3240,
+      "MAE": 1.7849197995738406,
+      "RMSE": 2.1556612780531497,
+      "R2": 0.23325539964333752,
+      "MAPE_percent": 7.49730395530739,
+      "actual_mean": 24.80869054158833,
+      "predicted_mean": 26.000043204938276
+    },
+    {
+      "target": "volume_m3_tree",
+      "age_months": 66,
+      "n": 3240,
+      "MAE": 0.05250447985802469,
+      "RMSE": 0.06467358053393155,
+      "R2": 0.41966548984803775,
+      "MAPE_percent": 21.15685264104867,
+      "actual_mean": 0.2779582098765432,
+      "predicted_mean": 0.29439251093827157
+    }
+  ]
+}

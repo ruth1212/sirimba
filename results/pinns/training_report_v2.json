@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "step": 53,
+  "model": "PINNs V2",
+  "architecture": {
+    "input_size": 6,
+    "hidden_size": 64,
+    "hidden_layers": 3,
+    "parameter_count": 8963
+  },
+  "training": {
+    "epochs": 100,
+    "learning_rate": 0.001,
+    "physics_weight": 0.1,
+    "optimizer": "Adam",
+    "device": "cpu",
+    "seed": 42,
+    "training_time_seconds": 138.95547437667847
+  },
+  "data": {
+    "train_dbh_height_rows": 174960,
+    "train_volume_rows": 142560,
+    "dbh_height_age_min": 6,
+    "dbh_height_age_max": 66,
+    "volume_age_min": 18,
+    "volume_age_max": 66
+  },
+  "physics": {
+    "formula": "V = C * DBH^2 * Height",
+    "coefficient": 3.41371714933862e-05,
+    "age_min_months": 18,
+    "age_max_months": 66
+  },
+  "best_model": {
+    "epoch": 100,
+    "loss_total": 0.34289681911468506,
+    "checkpoint": "C:\\tree_growth_fs\\tree_growth_fs\\results\\pinns\\models\\pinns_v2_growth_model.pt"
+  },
+  "volume_sanity": {
+    "min": -0.0034309327602386475,
+    "max": 0.4266008734703064,
+    "mean": 0.19318585097789764,
+    "negative_count": 553
+  },
+  "note": "PINNs V2 uses direct scaled outputs for DBH, Height, and Volume. No Softplus is applied to the supervised volume output. Physics is calculated after converting predictions back to physical units."
+}

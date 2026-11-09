@@ -1,0 +1,60 @@
+{
+  "status": "COMPLETE",
+  "model": "PINNs V2",
+  "checkpoint": "C:\\tree_growth_fs\\tree_growth_fs\\results\\pinns\\models\\pinns_v2_growth_model.pt",
+  "checkpoint_epoch": 100,
+  "checkpoint_loss": 0.34289681911468506,
+  "test_rows": 43740,
+  "metrics": [
+    {
+      "model": "PINNs V2",
+      "target": "dbh_cm",
+      "n_test": 43740,
+      "MAE": 1.1031189293160344,
+      "RMSE": 1.3597924130536243,
+      "R2": 0.9230068715844022,
+      "MAPE_percent": 12.619275497659144,
+      "negative_prediction_count": 0
+    },
+    {
+      "model": "PINNs V2",
+      "target": "height_m",
+      "n_test": 43740,
+      "MAE": 1.5766528676008924,
+      "RMSE": 1.9790535388041792,
+      "R2": 0.9065933754615612,
+      "MAPE_percent": 13.861724730649463,
+      "negative_prediction_count": 0
+    },
+    {
+      "model": "PINNs V2",
+      "target": "volume_m3_tree",
+      "n_test": 35640,
+      "MAE": 0.03325181186612808,
+      "RMSE": 0.045014404462408564,
+      "R2": 0.8147513307510726,
+      "MAPE_percent": 23.862988093265265,
+      "negative_prediction_count": 296
+    }
+  ],
+  "trajectory_logic": {
+    "dbh_predicted_decreases": 0,
+    "height_predicted_decreases": 0,
+    "volume_predicted_decreases": 0,
+    "negative_volume_count": 296,
+    "negative_volume_rate": 0.008305274971941638
+  },
+  "phi66": {
+    "dbh_actual_mean": 18.505493827160496,
+    "dbh_pred_mean": 19.21663475036621,
+    "dbh_mae": 1.0382110452515403,
+    "height_actual_mean": 24.80869054158833,
+    "height_pred_mean": 26.000043869018555,
+    "height_mae": 1.784919790562979,
+    "volume_actual_mean": 0.2779582098765432,
+    "volume_pred_mean": 0.29439249634742737,
+    "volume_mae": 0.052504480036769385,
+    "negative_volume_count": 0
+  },
+  "note": "Evaluation performed on the official held-out test dataset. No retraining or dataset modification was performed."
+}

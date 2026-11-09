@@ -1,0 +1,17 @@
+{
+  "step": 56,
+  "purpose": "Inspect negative PINNs V2 volume predictions before any model modification",
+  "test_rows": 35640,
+  "negative_volume_count": 296,
+  "negative_volume_percentage": 0.8305274971941637,
+  "negative_prediction_ages": [
+    18
+  ],
+  "localization": "NEGATIVES_ONLY_AT_P18",
+  "min_predicted_volume": -0.0034309328,
+  "max_predicted_volume": 0.4176236,
+  "mean_predicted_volume": 0.17743522751475896,
+  "dataset_modified": false,
+  "model_modified": false,
+  "retraining_performed": false
+}

@@ -1,0 +1,41 @@
+{
+  "project": "TREE GROWTH ANALYTICS",
+  "step": "39",
+  "source_train": "data\\model_ready\\train.csv",
+  "source_test": "data\\model_ready\\test.csv",
+  "features": [
+    "age_months",
+    "inventory_year",
+    "clone_factor",
+    "planting_year",
+    "disease_score",
+    "trees_per_ha"
+  ],
+  "targets": [
+    "dbh_cm",
+    "height_m",
+    "volume_m3_tree"
+  ],
+  "group_column": "compartment_id",
+  "age_range": {
+    "minimum": 6,
+    "maximum": 66
+  },
+  "prediction_rules": {
+    "dbh": "P6-P66",
+    "height": "P6-P66",
+    "volume": "P18-P66",
+    "phi": "P66 = 66 months",
+    "mai": "predicted_volume_m3_tree / (age_months / 12)"
+  },
+  "volume_training_rule": {
+    "minimum_age_months": 18,
+    "maximum_age_months": 66
+  },
+  "model_comparison": {
+    "same_features": true,
+    "same_targets": true,
+    "same_official_train_test_split": true,
+    "same_group_aware_split": true
+  }
+}

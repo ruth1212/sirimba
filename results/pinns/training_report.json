@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "epochs_requested": 100,
+  "epochs_completed": 100,
+  "best_epoch": 100,
+  "best_total_loss": 0.7128016948699951,
+  "learning_rate": 0.001,
+  "physics_weight": 0.1,
+  "physics_coefficient": 3.41371714933862e-05,
+  "train_rows": 174960,
+  "volume_train_rows": 142560,
+  "parameter_count": 8963,
+  "device": "cpu",
+  "old_checkpoint_used": false,
+  "test_data_used": false,
+  "dataset_modified": false
+}

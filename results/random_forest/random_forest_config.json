@@ -1,0 +1,66 @@
+{
+  "algorithm": "RandomForestRegressor",
+  "models": {
+    "RF_DBH": {
+      "target": "dbh_cm",
+      "dataset": "train_dbh_height",
+      "prediction_age": "P6-P66"
+    },
+    "RF_HEIGHT": {
+      "target": "height_m",
+      "dataset": "train_dbh_height",
+      "prediction_age": "P6-P66"
+    },
+    "RF_VOLUME": {
+      "target": "volume_m3_tree",
+      "dataset": "train_volume_p18",
+      "prediction_age": "P18-P66"
+    }
+  },
+  "features": [
+    "age_months",
+    "inventory_year",
+    "clone_factor",
+    "planting_year",
+    "disease_score",
+    "trees_per_ha"
+  ],
+  "group_column": "compartment_id",
+  "random_state": 42,
+  "preprocessing": {
+    "feature_scaling": false,
+    "target_scaling": false,
+    "raw_physical_units": true
+  },
+  "training_rules": {
+    "dbh": {
+      "age_min": 6,
+      "age_max": 66
+    },
+    "height": {
+      "age_min": 6,
+      "age_max": 66
+    },
+    "volume": {
+      "age_min": 18,
+      "age_max": 66
+    }
+  },
+  "evaluation_metrics": [
+    "MAE",
+    "RMSE",
+    "R2",
+    "MAPE"
+  ],
+  "prediction_rules": {
+    "phi": "P66 = 66 months",
+    "volume_prediction": "P18-P66",
+    "mai": "predicted_volume_m3_tree / (age_months / 12)"
+  },
+  "comparison_requirements": {
+    "same_features_as_pinns": true,
+    "same_official_split_as_pinns": true,
+    "same_targets_as_pinns": true,
+    "same_evaluation_metrics_as_pinns": true
+  }
+}

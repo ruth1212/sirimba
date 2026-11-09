@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "architecture": {
+    "input_size": 6,
+    "hidden_size": 64,
+    "hidden_layers": 3,
+    "parameter_count": 8963
+  },
+  "volume_output": {
+    "space": "scaled_direct_output",
+    "physical_reconstruction": "volume_scaled * scale + mean",
+    "positivity_activation": "none_in_supervised_head"
+  },
+  "physics": {
+    "coefficient": 3.41371714933862e-05,
+    "age_min": 18,
+    "age_max": 66,
+    "loss_weight": 0.1
+  },
+  "tests": {
+    "forward": true,
+    "physical_reconstruction": true,
+    "physics": true,
+    "backward": true,
+    "finite_gradients": true
+  },
+  "note": "This is a core architecture test only. No model training was performed."
+}

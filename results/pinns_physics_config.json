@@ -1,0 +1,32 @@
+{
+    "physics_type": "empirical_volume_consistency",
+    "relationship": "volume_m3_tree ~= C * dbh_cm^2 * height_m",
+    "C": 3.614623380990013e-05,
+    "C_statistics": {
+        "mean": 3.6147342138161326e-05,
+        "median": 3.614623380990013e-05,
+        "std": 1.7278775722362463e-06,
+        "min": 2.982930856369085e-05,
+        "max": 4.227211869396063e-05
+    },
+    "calibration_source": "model_train.csv",
+    "calibration_rows": 485998,
+    "features": [
+        "age_months",
+        "inventory_year",
+        "clone_factor",
+        "planting_year",
+        "disease_score",
+        "trees_per_ha"
+    ],
+    "targets": [
+        "dbh_cm",
+        "height_m",
+        "volume_m3_tree"
+    ],
+    "physics_loss": {
+        "type": "MSE",
+        "formula": "MSE(volume_pred, C * dbh_pred^2 * height_pred)"
+    },
+    "important_note": "C is an empirical dataset-calibrated constant. It is not claimed to be a universal biological constant."
+}

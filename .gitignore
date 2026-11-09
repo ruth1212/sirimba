@@ -1,0 +1,71 @@
+﻿.env
+.env.*
+!.env.example
+
+api/.env
+api/.env.*
+!api/.env.example
+.venv/
+__pycache__/
+*.py[cod]
+# Python environment
+venv/
+# Secrets and environment files
+# Frontend dependencies and build
+node_modules/
+.next/
+out/
+.vercel/
+# Dataset files - do not publish raw data
+data/*.csv
+data/*.xlsx
+data/*.xls
+data/**/*.csv
+data/**/*.xlsx
+data/**/*.xls
+# Model artifacts
+*.joblib
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.onnx
+# Backup files
+*backup*
+*.before*
+*.bak
+*.backup
+# SIRIMBA active AI models - allow deployment
+!results/random_forest/models/RF_DBH.joblib
+!results/random_forest/models/RF_HEIGHT.joblib
+!results/random_forest/models/RF_VOLUME.joblib
+!results/pinns/models/pinns_v2_growth_model.pt
+
+# SIRIMBA active PINNs preprocessing
+!data/model_ready/pipeline/preprocessing/feature_scaler.joblib
+!data/model_ready/pipeline/preprocessing/target_scaler.joblib
+!data/model_ready/pipeline/preprocessing/preprocessing_config.json
+# Generated reports
+laporan_mai*.pdf
+*.csv
+*.xlsx
+*.xls
+# Generated presentation reports
+**/tree_growth_report_current.pptx
+# Temporary encoding repair scripts
+**/repair_encoding*
+# Allow the active dummy dataset for public dashboard deployment
+!data/dataset_phi66_final.csv
+# Frontend backup
+/frontend copy/
+/frontend/.git_old_backup/
+
+dataset_load_log.txt
+
+data/dataset_registry.json
+data/dataset_registry.*.json
+data/dataset_registry_backup*.json
+data/dataset_staging/
+
+# Ignore historical before-version files
+*before*

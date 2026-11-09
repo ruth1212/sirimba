@@ -1,0 +1,32 @@
+{
+  "model": "RandomForestRegressor",
+  "target": "tha_m",
+  "features": [
+    "age_months",
+    "inventory_year",
+    "clone_factor",
+    "planting_year",
+    "disease_score",
+    "trees_per_ha"
+  ],
+  "group_column": "compartment_id",
+  "random_state": 42,
+  "n_estimators": 100,
+  "max_depth": null,
+  "min_samples_split": 2,
+  "min_samples_leaf": 1,
+  "max_features": 1.0,
+  "train_rows": 485998,
+  "test_rows": 121498,
+  "train_groups": 12,
+  "test_groups": 3,
+  "metrics": {
+    "mae": 0.6012110735688561,
+    "rmse": 0.708549550992154,
+    "r2": 0.9849562545536842,
+    "mape_percent": 2.4088313044963017
+  },
+  "training_time_seconds": 26.36482834815979,
+  "tha_definition": "THA (Top Height) = tinggi dominan tegakan, yaitu ukuran tinggi kelompok pohon-pohon dominan/tertinggi.",
+  "tha_numerical_method": "Numerical source method was not determined from the available dataset documentation."
+}
