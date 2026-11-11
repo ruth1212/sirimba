@@ -1,7 +1,10 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+
+const datasetManagementEnabled =
+  process.env.NEXT_PUBLIC_ENABLE_DATASET_MANAGEMENT !== "false";
 
 const navigation = [
   { label: "Overview", href: "/dashboard" },
@@ -43,7 +46,13 @@ export default function Sidebar() {
           aria-label="Main navigation"
           className="flex flex-1 gap-2 overflow-x-auto p-4 lg:flex-col"
         >
-          {navigation.map((item) => {
+          {navigation
+            .filter(
+              (item) =>
+                datasetManagementEnabled ||
+                !["/upload-dataset", "/dataset-history"].includes(item.href)
+            )
+            .map((item) => {
             const active =
               pathname === item.href ||
               (item.href === "/dashboard" && pathname === "/");

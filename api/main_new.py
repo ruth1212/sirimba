@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import onnxruntime as ort
 import json
+import os
 import uuid
 import threading
 import asyncio
@@ -183,7 +184,7 @@ app.add_middleware(
 
 
 # ============================================================
-# AI ASSISTANT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â REQUEST MODEL
+# AI ASSISTANT ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â REQUEST MODEL
 # ============================================================
 
 class ChatRequest(BaseModel):
@@ -201,7 +202,7 @@ class ChatRequest(BaseModel):
 
 
 # ============================================================
-# AI ASSISTANT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â CSV QUERY ENGINE
+# AI ASSISTANT ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â CSV QUERY ENGINE
 # ============================================================
 
 
@@ -573,7 +574,7 @@ def query_growth_data(question: str) -> dict:
                 message = (
                     f"Data historis tahun {requested_year} "
                     "tidak tersedia. Dataset hanya mencakup "
-                    "tahun pengukuran 2000ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“2024."
+                    "tahun pengukuran 2000ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ2024."
                 )
             else:
                 message = (
@@ -659,7 +660,7 @@ def load_dataset():
     # LOAD ACTIVE DATASET FROM REGISTRY
     # --------------------------------------------------------
 
-    if DATASET_REGISTRY_PATH.exists():
+    if ENABLE_DATASET_MANAGEMENT and DATASET_REGISTRY_PATH.exists():
 
         with DATASET_REGISTRY_PATH.open(
             "r",
@@ -1885,7 +1886,7 @@ def dashboard_summary(
 # ============================================================
 
 # ============================================================
-# MAI REPORT â€” ACTUAL DATA, NOT MODEL PREDICTIONS
+# MAI REPORT Ã¢â‚¬â€ ACTUAL DATA, NOT MODEL PREDICTIONS
 # ============================================================
 
 @app.get("/dashboard/mai-report")
@@ -2125,10 +2126,10 @@ def mai_report(
         "details": records_json(details[detail_columns]),
         "methodology": {
             "source_metric": "volume_m3_tree aktual pada umur pengamatan terakhir",
-            "estimated_volume_formula": "mean(volume_m3_tree) Ã— trees_per_ha",
-            "mai_formula": "estimated_volume_m3_ha Ã· (age_months / 12)",
-            "weighted_formula": "sum(MAI Ã— area_ha) Ã· sum(area_ha)",
-            "threshold_rule": "MAI >= 25 mÂ³/ha/tahun = Baik",
+            "estimated_volume_formula": "mean(volume_m3_tree) Ãƒâ€” trees_per_ha",
+            "mai_formula": "estimated_volume_m3_ha ÃƒÂ· (age_months / 12)",
+            "weighted_formula": "sum(MAI Ãƒâ€” area_ha) ÃƒÂ· sum(area_ha)",
+            "threshold_rule": "MAI >= 25 mÃ‚Â³/ha/tahun = Baik",
             "density_note": (
                 "Estimasi menggunakan trees_per_ha yang tercatat; "
                 "belum tentu sama dengan kepadatan pohon hidup aktual."
@@ -2333,7 +2334,7 @@ def compare_growth_groups(question: str):
     metric_labels = {
         "height_m": "Tinggi pohon (m)",
         "dbh_cm": "Diameter pohon (cm)",
-        "volume_m3_tree": "Volume per pohon (m³)",
+        "volume_m3_tree": "Volume per pohon (mÂ³)",
         "disease_score": "Disease score",
         "condition_score": "Condition score",
         "trees_per_ha": "Jumlah pohon per hektare",
@@ -2828,7 +2829,7 @@ def compare_growth_groups(question: str):
     metric_units = {
         "height_m": "m",
         "dbh_cm": "cm",
-        "volume_m3_tree": "m³ per pohon",
+        "volume_m3_tree": "mÂ³ per pohon",
         "trees_per_ha": "pohon/ha",
     }
 
@@ -3245,7 +3246,7 @@ def answer_prediction_question(question: str):
     metric_units = {
         "dbh_cm": "cm",
         "height_m": "m",
-        "volume_m3_tree": "m³",
+        "volume_m3_tree": "mÂ³",
     }
 
     selected_metric = None
@@ -3330,7 +3331,7 @@ def answer_prediction_question(question: str):
 
 
 # ============================================================
-# AI ASSISTANT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â CHAT ENDPOINT
+# AI ASSISTANT ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â CHAT ENDPOINT
 # ============================================================
 
 
@@ -4613,8 +4614,8 @@ def ai_chat(request: ChatRequest):
         ),
         (
             r"\b(?:target|variabel)\b.*\b(?:terbaik|tertinggi)\b.*"
-            r"\br\s*(?:2|Ã‚Â²|\^2)\b|"
-            r"\br\s*(?:2|Ã‚Â²|\^2)\b.*\b(?:terbaik|tertinggi)\b",
+            r"\br\s*(?:2|Ãƒâ€šÃ‚Â²|\^2)\b|"
+            r"\br\s*(?:2|Ãƒâ€šÃ‚Â²|\^2)\b.*\b(?:terbaik|tertinggi)\b",
             (
                 "Di antara tiga target PINNs V2, DBH memiliki R? "
                 "tertinggi sebesar 0.9230, diikuti tinggi sebesar "
@@ -4806,7 +4807,7 @@ def ai_chat(request: ChatRequest):
             "condition_score": "Skor kondisi",
             "dbh_cm": "Diameter pohon (cm)",
             "height_m": "Tinggi pohon (m)",
-            "volume_m3_tree": "Volume pohon (mÂ³)",
+            "volume_m3_tree": "Volume pohon (mÃ‚Â³)",
             "trees_per_ha": "Jumlah pohon per hektare",
         }
 
@@ -4886,7 +4887,7 @@ def ai_chat(request: ChatRequest):
         "condition_score": "Condition score",
         "dbh_cm": "Diameter pohon (cm)",
         "height_m": "Tinggi pohon (m)",
-        "volume_m3_tree": "Volume per pohon (m³)",
+        "volume_m3_tree": "Volume per pohon (mÂ³)",
         "trees_per_ha": "Jumlah pohon per hektare",
     }
 
@@ -4955,7 +4956,7 @@ def ai_chat(request: ChatRequest):
                         "Data historis untuk "
                         + " ".join(context)
                         + " tidak tersedia. "
-                        "Dataset hanya mencakup tahun pengukuran 2000ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“2024."
+                        "Dataset hanya mencakup tahun pengukuran 2000ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ2024."
                     ),
                     "data": facts,
                     "mode": "python_local",
@@ -5189,7 +5190,7 @@ def _build_comparison_report(question: str) -> dict:
         "condition_score": "Condition score",
         "dbh_cm": "Diameter pohon (cm)",
         "height_m": "Tinggi pohon (m)",
-        "volume_m3_tree": "Volume per pohon (m³)",
+        "volume_m3_tree": "Volume per pohon (mÂ³)",
         "trees_per_ha": "Jumlah pohon per hektare",
     }
 
@@ -5453,6 +5454,37 @@ UPLOAD_STAGING_DIR = PROJECT_ROOT / "data" / "dataset_staging"
 DATASET_REGISTRY_PATH = PROJECT_ROOT / "data" / "dataset_registry.json"
 DATASET_REGISTRY_LOCK = threading.Lock()
 
+ENABLE_DATASET_MANAGEMENT = (
+    os.getenv("ENABLE_DATASET_MANAGEMENT", "true").strip().lower()
+    == "true"
+)
+
+DATASET_MANAGEMENT_DISABLED_MESSAGE = (
+    "Dataset management dinonaktifkan sementara pada demo cloud."
+)
+def dataset_management_required(func):
+    if asyncio.iscoroutinefunction(func):
+        @functools.wraps(func)
+        async def async_wrapper(*args, **kwargs):
+            if not ENABLE_DATASET_MANAGEMENT:
+                raise HTTPException(
+                    status_code=503,
+                    detail=DATASET_MANAGEMENT_DISABLED_MESSAGE,
+                )
+            return await func(*args, **kwargs)
+
+        return async_wrapper
+
+    @functools.wraps(func)
+    def sync_wrapper(*args, **kwargs):
+        if not ENABLE_DATASET_MANAGEMENT:
+            raise HTTPException(
+                status_code=503,
+                detail=DATASET_MANAGEMENT_DISABLED_MESSAGE,
+            )
+        return func(*args, **kwargs)
+
+    return sync_wrapper
 UPLOAD_REQUIRED_COLUMNS = [
     "regional_id",
     "regional_name",
@@ -5484,6 +5516,7 @@ UPLOAD_REQUIRED_COLUMNS = [
 
 
 @app.get("/dataset/registry")
+@dataset_management_required
 def get_dataset_registry():
     """
     Menampilkan seluruh dataset yang tercatat di Registry.
@@ -5522,6 +5555,7 @@ def get_dataset_registry():
 
 
 @app.get("/dataset/{upload_id}/download")
+@dataset_management_required
 def download_dataset(upload_id: str):
     """
     Download dataset yang sudah tercatat di Registry.
@@ -5604,6 +5638,7 @@ def download_dataset(upload_id: str):
     )
 
 @app.get("/dataset/{upload_id}/detail")
+@dataset_management_required
 def get_dataset_detail(upload_id: str):
     """
     Mengambil detail satu dataset berdasarkan upload_id.
@@ -5752,6 +5787,7 @@ def save_dataset_registry(registry):
 # ============================================================
 
 @app.post("/dataset/{upload_id}/activate")
+@dataset_management_required
 @registry_locked
 def activate_dataset(upload_id: str):
     """
@@ -5917,6 +5953,7 @@ def activate_dataset(upload_id: str):
     }
 
 @app.post("/dataset/upload")
+@dataset_management_required
 @registry_locked
 async def upload_dataset(file: UploadFile = File(...)):
     """
