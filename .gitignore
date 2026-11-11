@@ -39,7 +39,7 @@ data/**/*.xls
 !results/random_forest/models/RF_DBH.joblib
 !results/random_forest/models/RF_HEIGHT.joblib
 !results/random_forest/models/RF_VOLUME.joblib
-!results/pinns/models/pinns_v2_growth_model.pt
+!results/pinns/models/pinns_v2_growth_model.onnx
 
 # SIRIMBA active PINNs preprocessing
 !data/model_ready/pipeline/preprocessing/feature_scaler.joblib
@@ -69,3 +69,7 @@ data/dataset_staging/
 
 # Ignore historical before-version files
 *before*
+
+# Temporary SIRIMBA dry-run logs
+sirimba_dry_run.log
+sirimba_intensive_dry_run.log

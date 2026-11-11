@@ -2,12 +2,16 @@
 from typing import TypedDict
 
 from langgraph.graph import StateGraph, START, END
-from langchain_ollama import ChatOllama
 
 try:
     from api.ai_tools import sirimba_tools
 except ModuleNotFoundError:
     from ai_tools import sirimba_tools
+
+try:
+    from api.llm_provider import invoke_llm
+except ModuleNotFoundError:
+    from llm_provider import invoke_llm
 
 
 class AIState(TypedDict):
@@ -44,8 +48,6 @@ def classify_question(state: AIState) -> dict:
     )):
         return {"intent": "prediction"}
 
-
-        # Pertanyaan statistik dan informasi aktual dataset
     if any(term in question_lower for term in (
         "rata-rata", "rata rata", "average", "mean",
         "jumlah", "total", "maksimum", "minimum",
@@ -54,29 +56,21 @@ def classify_question(state: AIState) -> dict:
     )):
         return {"intent": "general"}
 
-    try:
-        model = ChatOllama(
-            model="qwen2.5:1.5b",
-            temperature=0,
-        )
+    prompt = (
+        "Klasifikasikan pertanyaan ke satu kategori: "
+        "comparison, prediction, atau general.\n"
+        "Jawab hanya satu kata.\n\n"
+        f"Pertanyaan: {question}"
+    )
 
-        response = model.invoke(
-            "Klasifikasikan pertanyaan ke satu kategori:\n"
-            "comparison, prediction, atau general.\n"
-            "Jawab hanya satu kata.\n\n"
-            f"Pertanyaan: {question}"
-        )
+    response = invoke_llm(prompt)
 
-        intent = response.content.strip().lower()
+    if response:
+        intent = response.strip().lower()
+        if intent in ("prediction", "comparison", "general"):
+            return {"intent": intent}
 
-        if intent not in ("prediction", "comparison", "general"):
-            raise ValueError("Intent tidak valid")
-
-    except Exception:
-        intent = "general"
-
-    return {"intent": intent}
-
+    return {"intent": "general"}
 
 
 def handle_question(state: AIState) -> dict:
@@ -104,16 +98,10 @@ def handle_question(state: AIState) -> dict:
                 default=str,
             )
 
-        # Hasil tool yang tidak berhasil tidak diteruskan ke LLM
         if isinstance(result, dict) and result.get("success") is False:
             return {"answer": raw_result}
 
-        llm = ChatOllama(
-            model="qwen2.5:1.5b",
-            temperature=0,
-        )
-
-        response = llm.invoke(
+        prompt = (
             "Kamu adalah AI Assistant SIRIMBA.\n"
             "Jawab pertanyaan pengguna dalam bahasa Indonesia "
             "yang jelas dan ringkas.\n"
@@ -125,7 +113,13 @@ def handle_question(state: AIState) -> dict:
             f"Hasil tool:\n{raw_result}"
         )
 
-        return {"answer": response.content.strip()}
+        response = invoke_llm(prompt)
+
+        if response:
+            return {"answer": response}
+
+        # Fallback: hasil analitik tetap tersedia tanpa LLM.
+        return {"answer": raw_result}
 
     except Exception as exc:
         return {
@@ -134,7 +128,6 @@ def handle_question(state: AIState) -> dict:
                 f"{tool_name}: {type(exc).__name__}: {exc}"
             )
         }
-
 
 
 def build_ai_graph():

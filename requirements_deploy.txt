@@ -1,0 +1,39 @@
+﻿# SIRIMBA Tree Growth Analytics - Production Deployment Dependencies
+# Generated: 2026-11-10 (Phase 2 - Step 2.1)
+# PyTorch and heavy training packages excluded (Inference uses ONNX Runtime)
+
+# Web Framework & ASGI Server
+fastapi==0.141.1
+uvicorn==0.54.0
+pydantic==2.13.5
+python-dotenv==1.2.3
+python-multipart==0.0.33
+
+# Data Processing & Scientific Computing
+numpy==2.5.3
+pandas==3.0.6
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+openpyxl==3.1.5
+xlrd==2.0.2
+
+# PINNs Model Runtime Inference
+onnxruntime==1.31.1
+
+# Report Generation (PDF, PowerPoint, Charts)
+reportlab==5.0.1
+python-pptx==1.0.2
+matplotlib==3.11.2
+pillow==12.3.0
+
+# AI Assistant & LangGraph Agent
+langgraph==1.2.19
+langchain==1.4.7
+langchain-core==1.7.7
+langchain-ollama==1.1.0
+ollama==0.6.3
+httpx==0.28.1
+langchain-google-genai==4.4.3
+langchain-groq==1.1.3
+

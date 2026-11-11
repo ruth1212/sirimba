@@ -1,11 +1,10 @@
-﻿from pathlib import Path
+from pathlib import Path
 from typing import Optional
 
 import joblib
 import numpy as np
 import pandas as pd
-import torch
-import torch.nn as nn
+import onnxruntime as ort
 import json
 import uuid
 import threading
@@ -80,12 +79,12 @@ RF_MODEL_DIR = (
     / "models"
 )
 
-PINNS_MODEL_PATH = (
+PINNS_ONNX_MODEL_PATH = (
     PROJECT_ROOT
     / "results"
     / "pinns"
     / "models"
-    / "pinns_v2_growth_model.pt"
+    / "pinns_v2_growth_model.onnx"
 )
 
 PREPROCESSING_DIR = (
@@ -632,85 +631,6 @@ def query_growth_data(question: str) -> dict:
 
 
 # ============================================================
-# PINNS V2 ARCHITECTURE
-# ============================================================
-
-class TreeGrowthPINN(nn.Module):
-
-    def __init__(
-        self,
-        input_size=6,
-        hidden_size=64,
-    ):
-        super().__init__()
-
-        # Shared feature representation
-        self.shared = nn.Sequential(
-            nn.Linear(
-                input_size,
-                hidden_size,
-            ),
-
-            nn.Tanh(),
-
-            nn.Linear(
-                hidden_size,
-                hidden_size,
-            ),
-
-            nn.Tanh(),
-
-            nn.Linear(
-                hidden_size,
-                hidden_size,
-            ),
-
-            nn.Tanh(),
-        )
-
-        # Separate output heads
-        self.dbh_head = nn.Linear(
-            hidden_size,
-            1,
-        )
-
-        self.height_head = nn.Linear(
-            hidden_size,
-            1,
-        )
-
-        self.volume_head = nn.Linear(
-            hidden_size,
-            1,
-        )
-
-    def forward(self, x):
-
-        shared_features = self.shared(x)
-
-        dbh = self.dbh_head(
-            shared_features
-        )
-
-        height = self.height_head(
-            shared_features
-        )
-
-        volume = self.volume_head(
-            shared_features
-        )
-
-        return torch.cat(
-            [
-                dbh,
-                height,
-                volume,
-            ],
-            dim=1,
-        )
-
-
-# ============================================================
 # GLOBAL OBJECTS
 # ============================================================
 
@@ -975,11 +895,11 @@ def load_pinns():
     global feature_scaler
     global target_scaler
 
-    if not PINNS_MODEL_PATH.exists():
+    if not PINNS_ONNX_MODEL_PATH.exists():
 
         raise FileNotFoundError(
-            f"PINNs V2 model not found: "
-            f"{PINNS_MODEL_PATH}"
+            f"PINNs ONNX model not found: "
+            f"{PINNS_ONNX_MODEL_PATH}"
         )
 
     if not FEATURE_SCALER_PATH.exists():
@@ -1004,38 +924,13 @@ def load_pinns():
         TARGET_SCALER_PATH
     )
 
-    pinns_model = TreeGrowthPINN(
-    input_size=6,
-    hidden_size=64,
-)
-    checkpoint = torch.load(
-        PINNS_MODEL_PATH,
-        map_location="cpu",
+    pinns_model = ort.InferenceSession(
+        str(PINNS_ONNX_MODEL_PATH),
+        providers=["CPUExecutionProvider"],
     )
-
-    if (
-        isinstance(checkpoint, dict)
-        and "model_state_dict" in checkpoint
-    ):
-
-        state_dict = (
-            checkpoint[
-                "model_state_dict"
-            ]
-        )
-
-    else:
-
-        state_dict = checkpoint
-
-    pinns_model.load_state_dict(
-        state_dict
-    )
-
-    pinns_model.eval()
 
     print(
-        "PINNs V2 model : OK"
+        "PINNs ONNX model : OK"
     )
 
 
@@ -1314,18 +1209,14 @@ def predict_pinns(
     X = rows[FEATURES].astype(np.float32)
 
     X_scaled = feature_scaler.transform(X)
+    X_scaled = np.asarray(X_scaled, dtype=np.float32)
 
-    X_tensor = torch.tensor(
-        X_scaled,
-        dtype=torch.float32,
-    )
-
-    with torch.no_grad():
-        predictions_scaled = (
-            pinns_model(X_tensor)
-            .cpu()
-            .numpy()
-        )
+    predictions_scaled = pinns_model.run(
+        ["predictions_scaled"],
+        {
+            "features_scaled": X_scaled,
+        },
+    )[0]
 
     predictions_raw = np.zeros_like(
         predictions_scaled,
